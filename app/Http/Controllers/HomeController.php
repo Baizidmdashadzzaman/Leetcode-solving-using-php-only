@@ -28,7 +28,123 @@ class HomeController extends Controller
      * Display a listing of thresource.Add Two Numbers
      */
 
+
     public function index()
+    {
+        //longestCommonPrefix
+        $strs = ["flower","flow","flight"];
+        if($strs[0] != null)
+        {
+            $strs_new = ["flower","flow","flight"];
+            unset($strs_new[1]);
+            $new_combination = array();
+            $new_combination_repeat = array();
+            $newarray_of_data1=str_split($strs[0]);
+            $count=1;
+            foreach($newarray_of_data1 as $singledata){
+                array_push($new_combination,substr($strs[0], 0, $count));
+                $count++;
+            }
+            $array_count_repeat = array();
+            foreach($new_combination as $word){
+                echo($word);
+                $count_repeat=0;
+                foreach($newarray_of_data1 as $mystring){
+                    if(str_contains($mystring, $word)){
+                        $count_repeat++;
+                    }
+                }
+                array_push($array_count_repeat,$count_repeat);
+            }
+            dd($array_count_repeat);
+        }
+        dd($strs[1]);
+    }
+    public function add_binary()
+    {
+        //works when add small number
+        // $dec1 = bindec($a);
+        // $dec2 = bindec($b);
+        // $sumDec = bcadd($dec1,$dec2);
+        // $sumBin = decbin($sumDec);
+        // return $sumBin;
+
+        //Add Binary
+        $a = "10100000100100110110010000010101111011011001101110111111111101000000101111001110001111100001101";
+        $b = "110101001011101110001111100110001010100001101011101010000011011011001011101111001100000011011110011";
+        $maxLength = max(strlen($a), strlen($b));
+        $carry = 0;
+        $result = '';
+        // Pad the shorter binary number with zeros to make both numbers equal in length
+        $a = str_pad($a, $maxLength, '0', STR_PAD_LEFT);
+        $b = str_pad($b, $maxLength, '0', STR_PAD_LEFT);
+        // Iterate through each bit from right to left
+        for ($i = $maxLength - 1; $i >= 0; $i--) {
+            $bitA = (int)$a[$i];
+            $bitB = (int)$b[$i];
+            // Calculate the sum of current bits along with the carry
+            $sum = $bitA + $bitB + $carry;
+            // Update the result string
+            $result = ($sum % 2) . $result;
+            // Update the carry
+            $carry = (int)($sum / 2);
+        }
+        // If there's a carry left after all additions, prepend it to the result
+        if ($carry > 0) {
+            $result = $carry . $result;
+        }
+        return $result;
+    }
+
+    public function Find_the_Index_of_the_First_Occurrence_in_a_String()
+    {
+        $haystack = 'sadbutsad';
+        $needle   = 'sad';
+
+        if ($needle !== '' && str_contains($haystack, $needle)) {
+            return strpos($haystack, $needle);
+        }
+        else{
+            return -1;
+        }
+    }
+    public function palindrome_number()
+    {
+        //Palindrome Number
+        $x = 121;
+        $y = strrev($x);
+        if($x == $y){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public function sorting_array_without_building_function()
+    {
+        $array=array('2','4','8','5','1','7','6','9','10','3');
+        echo 'Unsorted array:';
+        print_r($array);
+        echo '<br/>';
+        echo 'Count i:';
+        for($i=0;$i<count($array);$i++){
+            echo $i;
+            echo '<br/>';
+            echo 'Count j:';
+            for($j=0;$j<count($array)-1;$j++){
+                echo $j;
+                if($array[$j] > $array[$j+1]){
+                    $temp = $array[$j+1];
+                    $array[$j+1] = $array[$j];
+                    $array[$j] = $temp;
+                }
+            }
+        }
+        echo '<br/>';
+        echo 'Sorted array:';
+        print_r($array);
+        echo '<br/>';
+    }
+    public function staricase_prb()
     {
         $new_array = array();
         $step = 6;
